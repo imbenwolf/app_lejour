@@ -1,0 +1,5 @@
+# DO NOT add production environment to Github
+environments/environment.prod.js
+
+# Other stuff
+.idea

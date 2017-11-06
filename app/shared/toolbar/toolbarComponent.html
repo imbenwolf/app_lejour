@@ -1,0 +1,30 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <h2>
+      <span>LeJour</span>
+    </h2>
+    <span flex></span>
+    <md-menu md-offset="0 50" ng-show="$root.isLoggedIn">
+      <md-button class="md-icon-button" aria-label="Menu" ng-click="$mdMenu.open$event)">
+        <i class="material-icons">&#xE5D2;</i>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button href="/#!/home" ng-disabled="$root.isOnPage.home">
+            Startseite
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button href="/#!/user/change-password" ng-disabled="$root.isOnPage.changePassword">
+            Passwort ändern
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button href="/#!/user/logout">
+            Logout
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>

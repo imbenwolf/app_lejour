@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lejour">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{{ title }} | LeJour</title>
+
+  <!-- Roboto Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100thin,300,400,500,700,400italic">
+
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.css">
+
+  <!-- Material Icons style sheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Own style sheet -->
+  <link href="assets/css/style.css" rel="stylesheet"/>
+
+</head>
+
+<body ng-cloak>
+
+<toolbar></toolbar>
+<!--Contents from other Pages are injected into following element using ng-view tag-->
+<md-content ng-view></md-content>
+
+<!-- Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.js"></script>
+
+<!-- Angular Material Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
+
+<!-- Firebase Library -->
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+
+<!-- AngularFire Library -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+<script src="app/app.module.js"></script>
+<script src="app/app.config.js"></script>
+<script src="app/app.firebase.js"></script>
+
+<script src="environments/environment.dev.js"></script>
+<script src="app/shared/factories/auth.js"></script>
+
+<script src="app/components/home/homeComponent.js"></script>
+<script src="app/components/user/login/loginComponent.js"></script>
+<script src="app/components/user/logout/logoutComponent.js"></script>
+<script src="app/components/user/changePassword/changePasswordComponent.js"></script>
+<script src="app/components/404/404Component.js"></script>
+<script src="app/shared/toolbar/toolbarComponent.js"></script>
+
+</body>
+
+</html>
