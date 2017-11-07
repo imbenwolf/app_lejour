@@ -7,7 +7,8 @@ angular.module('lejour.toolbar', [])
 
     $rootScope.isOnPage = {
       home: false,
-      changePassword: false
+      changePassword: false,
+      deleteAccount: false
     };
 
     $rootScope.resetPages = function () {
@@ -22,18 +23,19 @@ angular.module('lejour.toolbar', [])
     $rootScope.onWhichPage = function () {
       $rootScope.resetPages();
       switch ($location.path()) {
-        case "/":
         case "/home":
           $rootScope.isOnPage.home = true;
           break;
         case "/user/change-password":
           $rootScope.isOnPage.changePassword = true;
           break;
+        case "/user/delete":
+          $rootScope.isOnPage.deleteAccount = true;
+          break;
       }
     };
   })
   .component('toolbar', {
     templateUrl: '/app/shared/toolbar/toolbarComponent.html',
-    controller: function () {
-    }
+    controller: function () {}
   });

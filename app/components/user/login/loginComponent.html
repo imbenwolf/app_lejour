@@ -1,37 +1,40 @@
 <form name="loginForm">
 
-    <div layout="column" layout-align="center center">
+  <div layout="column" layout-align="center center">
 
-        <h1 class="md-display-2">{{ title }}</h1>
+    <h1 class="md-display-2">{{ title }}</h1>
 
-        <div id="inputContainer" layout="column">
+    <div id="inputContainer" layout="column">
 
-            <md-input-container>
-                <label>Username</label>
-                <input required id="username" name="username" ng-model="login.username">
-                <div ng-messages="loginForm.username.$error">
-                    <div ng-message="required">Der Username darf nicht leer sein!</div>
-                </div>
-            </md-input-container>
-
-
-            <md-input-container>
-                <label>Passwort</label>
-                <input required id="password" type="password" name="password" ng-model="login.password"
-                       minlength="4" maxlength="50"/>
-                <div ng-messages="loginForm.password.$error" role="alert">
-                    <div ng-message-exp="['required', 'minlength', 'maxlength']">
-                        Das Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
-                    </div>
-                </div>
-            </md-input-container>
-
+      <md-input-container>
+        <label>Username</label>
+        <input required id="username" name="username" ng-model="login.username">
+        <div ng-messages="loginForm.username.$error">
+          <div ng-message="required">Der Username darf nicht leer sein!</div>
         </div>
+      </md-input-container>
 
-        <md-button class="md-raised md-accent" ng-click="login()" type="submit">
-            Login
-        </md-button>
+      <md-input-container>
+        <label>Passwort</label>
+        <input required id="password" type="password" name="password" ng-model="login.password"
+               minlength="4" maxlength="50"/>
+        <div ng-messages="loginForm.password.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength']">
+            Das Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
+          </div>
+        </div>
+      </md-input-container>
 
     </div>
+
+    <md-button class="md-raised md-accent" ng-click="login()" type="submit">
+      Login
+    </md-button>
+
+    <p>Du hast kein Konto?
+      <md-button class="md-accent" href="/#!/user/register">Registrieren</md-button>
+    </p>
+
+  </div>
 
 </form>

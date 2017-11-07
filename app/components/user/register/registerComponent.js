@@ -1,0 +1,45 @@
+angular.module('lejour.user.register', [])
+  .config(function ($routeProvider) {
+    $routeProvider
+    /**
+     * route for the logout
+     */
+      .when('/user/register', {
+        templateUrl: '/app/components/user/register/registerComponent.html',
+        controller: 'registerController',
+        resolve: {
+          // controller will not be loaded until $waitForSignIn resolves
+          // Auth refers to our $firebaseAuth wrapper in the factory below
+          "currentAuth": function (Auth) {
+            // $waitForSignIn returns a promise so the resolve waits for it to complete
+            return Auth.$requireSignOut();
+          }
+        }
+      });
+  })
+  /**
+   * create the mainController and inject Angular's $scope
+   */
+  .controller('registerController', function ($rootScope, $scope, $location, $mdToast, Auth) {
+    $rootScope.title = 'Registierung';
+
+    $scope.role = 'apprentice';
+
+    $scope.register = function () {
+      if ($scope.registerForm.$invalid) {
+        $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
+      }
+      else {
+        if ($scope.password !== $scope.repeatPassword) {
+          $mdToast.showSimple('Passwörter stimmen nicht überein!');
+        }
+        Auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
+          .then(function () {
+            $location.path("/");
+            $mdToast.showSimple('Registrierung erfolgreich!');
+          }).catch(function () {
+          $mdToast.showSimple('Registrierung fehlgeschlagen!');
+        });
+      }
+    };
+  });

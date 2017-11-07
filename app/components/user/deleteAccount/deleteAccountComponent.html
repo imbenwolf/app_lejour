@@ -1,0 +1,41 @@
+<form name="deleteAccpuntForm">
+
+  <div layout="column" layout-align="center center">
+
+    <h1 class="md-display-2">{{ title }}</h1>
+    <h2 class="md-headline">Alle Ihre Einträge werden mitgelöscht!</h2>
+
+    <div id="inputContainer" layout="column">
+
+      <md-input-container>
+        <label>Passwort</label>
+        <input required id="password" type="password" ng-model="password" name="password"
+               minlength="4" maxlength="50"/>
+        <div ng-messages="delteAccountForm.password.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength']">
+            Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
+          </div>
+        </div>
+      </md-input-container>
+
+
+      <md-input-container>
+        <label>Passwort wiederholen</label>
+        <input required id="repeatPassword" type="password" ng-model="repeatPassword" name="repeatPassword"
+               minlength="4" maxlength="50"/>
+        <div ng-messages="delteAccountForm.repeatPassword.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength']">
+            Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
+          </div>
+        </div>
+      </md-input-container>
+
+    </div>
+
+    <md-button class="md-raised md-accent" ng-click="delete()" type="submit">
+      Account löschen
+    </md-button>
+
+  </div>
+
+</form>

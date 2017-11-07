@@ -1,0 +1,56 @@
+<form name="registerForm">
+
+  <div layout="column" layout-align="center center">
+
+    <h1 class="md-display-2">{{ title }}</h1>
+
+    <div id="inputContainer" layout="column">
+
+      <md-input-container>
+        <label>Email</label>
+        <input required id="email" name="email" ng-model="email">
+        <div ng-messages="registerForm.email.$error">
+          <div ng-message="required">Das Email darf nicht leer sein!</div>
+        </div>
+      </md-input-container>
+
+        <p>Rolle</p>
+        <md-radio-group ng-model="role" ng-required="true">
+
+          <md-radio-button value="mentor" class="md-accent">Lehrmeister</md-radio-button>
+          <md-radio-button value="apprentice" class="md-accent">Lernender</md-radio-button>
+
+        </md-radio-group>
+
+      <md-input-container>
+        <label>Passwort</label>
+        <input required id="password" type="password" ng-model="password" name="password"
+               minlength="4" maxlength="50"/>
+        <div ng-messages="registerForm.password.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength']">
+            Das Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
+          </div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Passwort wiederholen</label>
+        <input required id="repeatPassword" type="password" ng-model="repeatPassword" name="repeatPassword"
+               minlength="4" maxlength="50"/>
+        <div ng-messages="registerForm.repeatPassword.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength']">
+            Das Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
+          </div>
+        </div>
+      </md-input-container>
+
+    </div>
+
+    <md-button class="md-raised md-accent" ng-click="register()" type="submit">
+      Registrieren
+    </md-button>
+
+  </div>
+
+</form>
+

@@ -6,7 +6,9 @@ angular.module('lejour', [
   'lejour.404',
   'lejour.user.changePassword',
   'lejour.user.login',
-  'lejour.user.logout'
+  'lejour.user.logout',
+  'lejour.user.register',
+  'lejour.user.delete'
 ])
   .run(function ($rootScope, $location, Auth) {
     $rootScope.title = '';

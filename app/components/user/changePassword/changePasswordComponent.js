@@ -26,7 +26,7 @@ angular.module('lejour.user.changePassword', [])
     /**
      * method for checking change password with validation and displaying snackbar
      */
-    $scope.checkChangePassword = function () {
+    $scope.changePassword = function () {
       if ($scope.changePasswordForm.$invalid) {
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       }
