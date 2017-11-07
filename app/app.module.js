@@ -1,6 +1,7 @@
 angular.module('lejour', [
   'lejour.config',
   'lejour.firebase.auth',
+  'lejour.firebase.firestore',
   'lejour.toolbar',
   'lejour.home',
   'lejour.404',

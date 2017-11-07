@@ -20,7 +20,7 @@ angular.module('lejour.user.register', [])
   /**
    * create the mainController and inject Angular's $scope
    */
-  .controller('registerController', function ($rootScope, $scope, $location, $mdToast, Auth) {
+  .controller('registerController', function ($rootScope, $scope, $location, $mdToast, Auth, Firestore) {
     $rootScope.title = 'Registierung';
 
     $scope.role = 'apprentice';
@@ -35,8 +35,15 @@ angular.module('lejour.user.register', [])
         }
         Auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
           .then(function () {
-            $location.path("/");
-            $mdToast.showSimple('Registrierung erfolgreich!');
+            Firestore.$createUserWithEmailAndRole($scope.email, $scope.role)
+              .then(function() {
+                $location.path("/");
+                $mdToast.showSimple('Registrierung erfolgreich!');
+              })
+              .catch(function() {
+                Auth.$deleteUser();
+                $mdToast.showSimple('Registrierung fehlgeschlagen!');
+              });
           }).catch(function () {
           $mdToast.showSimple('Registrierung fehlgeschlagen!');
         });

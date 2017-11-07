@@ -20,7 +20,7 @@ angular.module('lejour.user.delete', [])
   /**
    * create the mainController and inject Angular's $scope
    */
-  .controller('deleteController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth) {
+  .controller('deleteController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth, Firestore) {
     $rootScope.title = "Account löschen";
 
     /**
@@ -33,16 +33,20 @@ angular.module('lejour.user.delete', [])
         if ($scope.password !== $scope.repeatPassword) {
           $mdToast.showSimple('Passwörter müssen übereinstimmen!');
         } else {
-          Auth.$signInWithEmailAndPassword(currentAuth.email, $scope.password).then(function () {
+          $scope.email = currentAuth.email;
+          Auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function () {
             Auth.$deleteUser().then(function () {
-              $location.path("/");
-              $mdToast.showSimple('Account löschen erfolgreich!');
-            }).catch(function (error) {
-              console.log(error);
+              Firestore.$deleteUserWithEmail($scope.email).then(function() {
+                $location.path("/");
+                $mdToast.showSimple('Account löschen erfolgreich!');
+              }).catch(function() {
+                Auth.$createUserWithEmailAndPassword($scope.email, $scope.password);
+                $mdToast.showSimple('Account löschen fehlgeschlagen!');
+              });
+            }).catch(function() {
               $mdToast.showSimple('Account löschen fehlgeschlagen!');
             });
-          }).catch(function (error) {
-            console.log(error);
+          }).catch(function() {
             $mdToast.showSimple('Account löschen fehlgeschlagen!');
           });
         }
