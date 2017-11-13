@@ -1,9 +1,6 @@
 angular.module('lejour.user.login', [])
   .config(function ($routeProvider) {
     $routeProvider
-    /**
-     * route for the login page
-     */
       .when('/user/login', {
         templateUrl: '/app/components/user/login/loginComponent.html',
         controller: 'loginController',
@@ -17,16 +14,9 @@ angular.module('lejour.user.login', [])
         }
       })
   })
-  /**
-   * create the mainController and inject Angular's $scope
-   */
   .controller('loginController', function ($rootScope, $scope, $location, $mdToast, Auth) {
     $rootScope.title = "Login";
 
-    /**
-     * method for logging in with validation and displaying snackbar
-     * @returns {boolean}
-     */
     $scope.login = function () {
       var email = document.getElementById("username").value;
       var password = document.getElementById("password").value;
@@ -36,8 +26,6 @@ angular.module('lejour.user.login', [])
       }
       else {
         Auth.$signInWithEmailAndPassword(email, password).then(function (user) {
-          $rootScope.email = user.email;
-          $rootScope.isLoggedIn = true;
           $location.path("/");
           $mdToast.showSimple('Login erfolgreich!');
         }).catch(function () {

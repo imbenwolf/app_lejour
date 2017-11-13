@@ -29,5 +29,22 @@ angular.module('lejour.firebase.firestore', [
       });
     };
 
+    firestore.$getJournalDatabase = function() {
+      return firestore.collection('journals');
+    };
+
+    firestore.$createJournal = function(title, date, text, author) {
+      return firestore.$getJournalDatabase().add({
+        title: title,
+        date: date,
+        text: text,
+        author: author
+      })
+    };
+
+    firestore.$getJournalsByAuthor = function(author) {
+      return firestore.$getJournalDatabase().where("author", "==", author).get();
+    };
+
     return firestore;
   });

@@ -17,9 +17,6 @@ angular.module('lejour.toolbar', [])
       });
     };
 
-    /**
-     * method for figuring out on which page you are (for disabled menu options)
-     */
     $rootScope.onWhichPage = function () {
       $rootScope.resetPages();
       switch ($location.path()) {

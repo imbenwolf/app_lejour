@@ -1,9 +1,6 @@
 angular.module('lejour.user.changePassword', [])
   .config(function ($routeProvider) {
     $routeProvider
-    /**
-     * route for the change password page
-     */
       .when('/user/change-password', {
         templateUrl: '/app/components/user/changePassword/changePasswordComponent.html',
         controller: 'changePasswordController',
@@ -17,15 +14,9 @@ angular.module('lejour.user.changePassword', [])
         }
       })
   })
-  /**
-   * create the mainController and inject Angular's $scope
-   */
   .controller('changePasswordController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth) {
     $rootScope.title = "Passwort Ändern";
 
-    /**
-     * method for checking change password with validation and displaying snackbar
-     */
     $scope.changePassword = function () {
       if ($scope.changePasswordForm.$invalid) {
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');

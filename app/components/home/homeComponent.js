@@ -1,16 +1,10 @@
 angular.module('lejour.home', [])
   .config(function ($routeProvider) {
     $routeProvider
-    /**
-     * route for default page
-     */
       .when('/', {
         redirectTo: '/home'
       })
 
-      /**
-       * route for the home page
-       */
       .when('/home', {
         templateUrl: '/app/components/home/homeComponent.html',
         controller: 'homeController',
@@ -24,9 +18,22 @@ angular.module('lejour.home', [])
         }
       })
   })
-  /**
-   * create the mainController and inject Angular's $scope
-   */
-  .controller('homeController', function ($rootScope) {
+  .controller('homeController', function ($rootScope, $scope, currentAuth, Firestore, $mdToast) {
     $rootScope.title = "Home";
+
+    $scope.journals = [];
+
+    $scope.test = "test";
+
+    Firestore.$getJournalsByAuthor(currentAuth.email)
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          $scope.$apply(function() {
+            $scope.journals.push(doc.data());
+          });
+        });
+      })
+      .catch(function () {
+        $mdToast.showSimple('Konnte nicht alle Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
+      });
   });

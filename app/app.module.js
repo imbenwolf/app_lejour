@@ -9,7 +9,9 @@ angular.module('lejour', [
   'lejour.user.login',
   'lejour.user.logout',
   'lejour.user.register',
-  'lejour.user.delete'
+  'lejour.user.delete',
+  'lejour.journal.write',
+  'lejour.journal.edit'
 ])
   .run(function ($rootScope, $location, Auth) {
     $rootScope.title = '';
@@ -19,8 +21,6 @@ angular.module('lejour', [
     });
 
     $rootScope.$on("$routeChangeError", function (event, next, previous, error) {
-      // We can catch the error thrown when the $requireSignIn promise is rejected
-      // and redirect the user back to the home page
       if (error === "AUTH_REQUIRED") {
         $location.path("/user/login");
       }

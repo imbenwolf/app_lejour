@@ -1,0 +1,35 @@
+<form name="editJournalForm">
+
+  <div layout="column" layout-align="center center">
+
+    <h1 class="md-display-2">{{ title }}</h1>
+
+    <div id="inputContainer" layout="column">
+
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+          <label>Titel</label>
+          <input ng-model="journal.title">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Datum</label>
+          <md-datepicker ng-model="journal.date"></md-datepicker>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Text</label>
+        <textarea ng-model="journal.text" md-maxlength="1500" rows="5" md-select-on-focus></textarea>
+      </md-input-container>
+
+    </div>
+
+    <md-button class="md-raised md-accent" ng-click="save()" type="submit">
+      Speichern
+    </md-button>
+
+  </div>
+
+</form>
+

@@ -1,9 +1,6 @@
 angular.module('lejour.user.delete', [])
   .config(function ($routeProvider) {
     $routeProvider
-    /**
-     * route for the logout
-     */
       .when('/user/delete', {
         templateUrl: '/app/components/user/deleteAccount/deleteAccountComponent.html',
         controller: 'deleteController',
@@ -17,15 +14,9 @@ angular.module('lejour.user.delete', [])
         }
       });
   })
-  /**
-   * create the mainController and inject Angular's $scope
-   */
   .controller('deleteController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth, Firestore) {
     $rootScope.title = "Account löschen";
 
-    /**
-     * method for logging out and displaying snackbar
-     */
     $scope.delete = function () {
       if ($scope.deleteAccpuntForm.$invalid) {
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');

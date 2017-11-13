@@ -24,3 +24,17 @@
   font-weight: 100;
   margin: 0 0 40px 0;
 }
+
+.white-background {
+  background-color: white;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.fab-bottom-right {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}

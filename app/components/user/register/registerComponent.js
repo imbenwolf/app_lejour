@@ -1,9 +1,6 @@
 angular.module('lejour.user.register', [])
   .config(function ($routeProvider) {
     $routeProvider
-    /**
-     * route for the logout
-     */
       .when('/user/register', {
         templateUrl: '/app/components/user/register/registerComponent.html',
         controller: 'registerController',
@@ -17,9 +14,6 @@ angular.module('lejour.user.register', [])
         }
       });
   })
-  /**
-   * create the mainController and inject Angular's $scope
-   */
   .controller('registerController', function ($rootScope, $scope, $location, $mdToast, Auth, Firestore) {
     $rootScope.title = 'Registierung';
 
