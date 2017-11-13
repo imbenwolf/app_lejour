@@ -28,4 +28,8 @@ angular.module('lejour', [
         $location.path("/");
       }
     });
+
+    $rootScope.navigateTo = function(path) {
+      $location.path(path);
+    }
   });

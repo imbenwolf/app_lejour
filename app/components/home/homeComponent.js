@@ -23,17 +23,21 @@ angular.module('lejour.home', [])
 
     $scope.journals = [];
 
-    $scope.test = "test";
-
-    Firestore.$getJournalsByAuthor(currentAuth.email)
+    Firestore.$getJournalsWithEmail(currentAuth.email)
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
+          var journalObject = doc.data();
+          journalObject.id = doc.id;
           $scope.$apply(function() {
-            $scope.journals.push(doc.data());
+            $scope.journals.push(journalObject);
           });
         });
       })
       .catch(function () {
-        $mdToast.showSimple('Konnte nicht alle Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
+        $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
       });
+
+    $scope.editJournal = function (journalId) {
+      $location.path("/journal/edit/"+journalId);
+    }
   });

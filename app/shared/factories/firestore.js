@@ -42,8 +42,21 @@ angular.module('lejour.firebase.firestore', [
       })
     };
 
-    firestore.$getJournalsByAuthor = function(author) {
-      return firestore.$getJournalDatabase().where("author", "==", author).get();
+    firestore.$getJournalWithId = function (id) {
+      return firestore.$getJournalDatabase().doc(id);
+    };
+
+    firestore.$getJournalsWithEmail = function(email) {
+      return firestore.$getJournalDatabase().where("author", "==", email).get();
+    };
+
+    firestore.$updateJournalWithId = function(id, title, date, text, author) {
+      return firestore.$getJournalWithId(id).set({
+        title: title,
+        date: date,
+        text: text,
+        author: author
+      })
     };
 
     return firestore;

@@ -24,9 +24,9 @@ angular.module('lejour.journal.write', [])
       else {
         Firestore.$createJournal($scope.journal.title, $scope.journal.date, $scope.journal.text, currentAuth.email).then(function () {
           $location.path("/");
-          $mdToast.showSimple('Journal schreiben erfolgreich!');
+          $mdToast.showSimple('Journal speichern erfolgreich!');
         }).catch(function () {
-          $mdToast.showSimple('Passwort ändern fehlgeschlagen!');
+          $mdToast.showSimple('Journal speichern fehlgeschlagen!');
         });
       }
     };
