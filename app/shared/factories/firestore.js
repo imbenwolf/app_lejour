@@ -59,5 +59,9 @@ angular.module('lejour.firebase.firestore', [
       })
     };
 
+    firestore.$deleteJournalWithId = function(id) {
+      return firestore.$getJournalWithId(id).delete();
+    };
+
     return firestore;
   });
