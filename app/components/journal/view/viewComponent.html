@@ -1,0 +1,71 @@
+<div layout="row" layout-align="center center">
+  <div flex="100" flex-gt-xs="80">
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon">
+            <i class="material-icons">&#xE865;</i>
+          </md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{ journal.author }}</span>
+          <span class="md-subhead">{{ journal.date | date }}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ journal.title }}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>{{ journal.text }}</p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button">
+          <md-icon class="md-secondary" ng-click="navigateTo('/journal/edit/'+journal.id)">
+            <i class="material-icons">&#xE254;</i>
+          </md-icon>
+        </md-button>
+        <md-button class="md-icon-button">
+          <md-icon class="md-secondary" ng-click="navigateTo('/journal/delete/'+journal.id)">
+            <i class="material-icons">&#xE872;</i>
+          </md-icon>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+
+    <md-card>
+      <md-list class="no-padding">
+        <form name="addCommentForm">
+          <div layout-gt-xs="row">
+            <md-input-container flex-gt-xs>
+              <label>Kommentieren</label>
+              <input ng-model="journal.comment">
+            </md-input-container>
+
+            <md-input-container>
+              <md-button class="md-icon-button" ng-click="comment()" type="submit">
+                <md-icon>
+                  <i class="material-icons">&#xE163;</i>
+                </md-icon>
+              </md-button>
+            </md-input-container>
+          </div>
+        </form>
+        <div ng-if="comments.length > 0">
+          <md-subheader class="white-background">Kommentare</md-subheader>
+          <md-list-item class="md-2-line" ng-repeat="comment in comments">
+            <md-icon class="md-avatar-icon">
+              <i class="material-icons">&#xE865;</i>
+            </md-icon>
+            <div class="md-list-item-text">
+              <h3>{{ comment.text }}</h3>
+              <p>{{ comment.author }}</p>
+            </div>
+            <md-divider></md-divider>
+          </md-list-item>
+        </div>
+      </md-list>
+    </md-card>
+  </div>
+</div>

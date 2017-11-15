@@ -46,6 +46,10 @@ angular.module('lejour.firebase.firestore', [
       return firestore.$getJournalDatabase().doc(id);
     };
 
+    firestore.$getJournalDataWithId = function (id) {
+      return firestore.$getJournalWithId(id).get();
+    };
+
     firestore.$getJournalsWithEmail = function(email) {
       return firestore.$getJournalDatabase().where("author", "==", email).get();
     };
@@ -61,6 +65,21 @@ angular.module('lejour.firebase.firestore', [
 
     firestore.$deleteJournalWithId = function(id) {
       return firestore.$getJournalWithId(id).delete();
+    };
+
+    firestore.$getCommentDatabaseFromJournalWithId = function(id) {
+      return firestore.$getJournalWithId(id).collection('comments');
+    };
+
+    firestore.$addCommentToJournalWithId = function(id, author, text) {
+      return firestore.$getCommentDatabaseFromJournalWithId(id).add({
+        author: author,
+        text: text
+      })
+    };
+
+    firestore.$getCommentsFromJournalWithId = function(id) {
+      return firestore.$getCommentDatabaseFromJournalWithId(id).get();
     };
 
     return firestore;

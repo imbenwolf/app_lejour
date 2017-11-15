@@ -12,7 +12,8 @@ angular.module('lejour', [
   'lejour.user.delete',
   'lejour.journal.write',
   'lejour.journal.edit',
-  'lejour.journal.delete'
+  'lejour.journal.delete',
+  'lejour.journal.view'
 ])
   .run(function ($rootScope, $location, Auth) {
     $rootScope.title = '';
