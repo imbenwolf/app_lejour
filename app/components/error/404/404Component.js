@@ -1,12 +1,12 @@
-angular.module('lejour.404', [])
+angular.module('lejour.error.404', [])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/404', {
-        templateUrl: '/app/components/404/404Component.html',
+      .when('/error/404', {
+        templateUrl: '/app/components/error/404/404Component.html',
         controller: '404Controller'
       })
 
-      .otherwise({redirectTo: '/404'});
+      .otherwise({redirectTo: '/error/404'});
   })
 
   .controller('404Controller', function ($rootScope) {
