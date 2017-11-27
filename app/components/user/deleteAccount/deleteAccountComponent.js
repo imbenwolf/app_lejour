@@ -3,7 +3,7 @@ angular.module('lejour.user.delete', [])
     $routeProvider
       .when('/user/delete', {
         templateUrl: '/app/components/user/deleteAccount/deleteAccountComponent.html',
-        controller: 'deleteController',
+        controller: 'deleteAccountController',
         resolve: {
           // controller will not be loaded until $waitForSignIn resolves
           // Auth refers to our $firebaseAuth wrapper in the factory below
@@ -14,7 +14,7 @@ angular.module('lejour.user.delete', [])
         }
       });
   })
-  .controller('deleteController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth, Firestore) {
+  .controller('deleteAccountController', function ($rootScope, $scope, $location, $mdToast, currentAuth, Auth, Firestore) {
     $rootScope.title = "Account löschen";
 
     $scope.delete = function () {
