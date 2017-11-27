@@ -5,8 +5,8 @@ angular.module('lejour.journal.delete', [])
         templateUrl: '/app/components/journal/delete/deleteComponent.html',
         controller: 'deleteController',
         resolve: {
-          "currentAuth": function (Auth) {
-            return Auth.$requireSignIn();
+          "currentAuth": function (Auth, $route) {
+            return Auth.$requireSignInAndApprenticeAuthorOfValidJournalWithId($route.current.params.journalId);
           }
         }
       });

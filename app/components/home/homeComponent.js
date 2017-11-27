@@ -45,11 +45,9 @@ angular.module('lejour.home', [])
 
       Firestore.$getJournalsOfConfirmedApprenticesFromMentorWithEmail(currentAuth.email)
         .then(function (journalsPerApprentices) {
-          console.log(journalsPerApprentices["apprentice@apprentice.com"].length);
           $scope.journalsPerApprentices = journalsPerApprentices;
-          console.log($scope.journalsPerApprentices["apprentice@apprentice.com"]);
         })
-        .catch(function () {
+        .catch(function (error) {
           $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
     }

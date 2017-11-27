@@ -169,6 +169,18 @@ angular.module('lejour.firebase.firestore', [
       return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(".", "###"), "==", true).get();
     };
 
+    firestore.$isMentorWithEmailConfirmedByApprenticeWithEmail = function (apprenticeEmail, mentorEmail) {
+      var defer = $q.defer();
+      var result = {};
+      firestore.$getUserDatabase().where("email", "==", mentorEmail)
+        .where("apprentices." + apprenticeEmail.replace(".", "###"), "==", true).get().then(function (querySnapshot) {
+          console.log(querySnapshot);
+          result = !querySnapshot.empty;
+        defer.resolve(result);
+      });
+      return defer.promise;
+    };
+
     firestore.$acceptMentorWithEmailFromApprenticeWithEmail = function (mentorEmail, apprenticeEmail) {
       return firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {

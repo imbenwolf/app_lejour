@@ -16,7 +16,7 @@ angular.module('lejour', [
   'lejour.journal.delete',
   'lejour.journal.view'
 ])
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, $mdToast) {
     $rootScope.title = '';
 
     Auth.$onAuthStateChanged(function (user) {
@@ -29,6 +29,14 @@ angular.module('lejour', [
       }
       else if (error === "AUTH_FORBIDDEN") {
         $location.path("/");
+      } else if (error === "NOT_AUTHORIZED") {
+        $location.path("/");
+        $mdToast.showSimple("Sie sind nicht authorisiert, diese Seite aufzurufen!")
+      } else if (error === "INVALID_JOURNAL_ID") {
+        $location.path("/");
+        $mdToast.showSimple("Dieses Journal existiert nicht!")
+      } else {
+        $location.path("/user/login");
       }
     });
 

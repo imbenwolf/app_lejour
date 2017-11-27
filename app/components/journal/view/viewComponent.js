@@ -5,8 +5,8 @@ angular.module('lejour.journal.view', [])
         templateUrl: '/app/components/journal/view/viewComponent.html',
         controller: 'viewController',
         resolve: {
-          "currentAuth": function (Auth) {
-            return Auth.$requireSignIn();
+          "currentAuth": function (Auth, $route) {
+            return Auth.$requireSignInAndAuthorOrFollowingApprenticeOfValidJournalWithId($route.current.params.journalId);
           }
         }
       });

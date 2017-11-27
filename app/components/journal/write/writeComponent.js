@@ -6,7 +6,7 @@ angular.module('lejour.journal.write', [])
         controller: 'writeController',
         resolve: {
           "currentAuth": function (Auth) {
-            return Auth.$requireSignIn();
+            return Auth.$requireSignInAndApprentice();
           }
         }
       })

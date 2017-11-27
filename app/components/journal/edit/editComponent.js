@@ -5,8 +5,8 @@ angular.module('lejour.journal.edit', [])
         templateUrl: '/app/components/journal/editJournalComponent.html',
         controller: 'editController',
         resolve: {
-          "currentAuth": function (Auth) {
-            return Auth.$requireSignIn();
+          "currentAuth": function (Auth, $route) {
+            return Auth.$requireSignInAndApprenticeAuthorOfValidJournalWithId($route.current.params.journalId);
           }
         }
       })
