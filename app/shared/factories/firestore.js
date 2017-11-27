@@ -117,7 +117,7 @@ angular.module('lejour.firebase.firestore', [
 
     firestore.$getUnconfirmedApprenticesFromMentorWithEmail = function(mentorEmail) {
       var defer = $q.defer();
-      var unconfirmedApprentices = [];
+      var unconfirmedApprentices = {};
       firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var apprentices = doc.data().apprentices;
@@ -129,8 +129,33 @@ angular.module('lejour.firebase.firestore', [
               });
             }
           });
-          console.log(unconfirmedApprentices);
           defer.resolve(unconfirmedApprentices);
+        });
+      });
+      return defer.promise;
+    };
+
+    firestore.$getJournalsOfConfirmedApprenticesFromMentorWithEmail = function (mentorEmail) {
+      var defer = $q.defer();
+      var journals = {};
+      firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          var apprentices = doc.data().apprentices;
+          console.log(apprentices);
+          angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
+            apprenticeEmail = apprenticeEmail.replace("###", ".");
+            if (confirmed) {
+              journals[apprenticeEmail] = [];
+              firestore.$getJournalsWithEmail(apprenticeEmail).then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                  var journalObject = doc.data();
+                  journalObject.id = doc.id;
+                  journals[apprenticeEmail].push(journalObject);
+                });
+                defer.resolve(journals);
+              });
+            }
+          });
         });
       });
       return defer.promise;

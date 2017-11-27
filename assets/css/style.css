@@ -42,3 +42,18 @@
 .searchResultCard {
   margin: 0 0 16px 0;
 }
+
+.right {
+  float: right;
+}
+
+.expand-list-subheader {
+  transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.expand-list-subheader:hover {
+  background-color: rgba(158,158,158,0.2);
+}

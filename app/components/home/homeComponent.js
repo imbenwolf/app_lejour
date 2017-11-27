@@ -21,23 +21,39 @@ angular.module('lejour.home', [])
   .controller('homeController', function ($rootScope, $scope, currentAuth, Firestore, $mdToast) {
     $rootScope.title = "Home";
 
-    $scope.journals = [];
+    $scope.role = currentAuth.role;
 
-    Firestore.$getJournalsWithEmail(currentAuth.email)
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          var journalObject = doc.data();
-          journalObject.id = doc.id;
-          $scope.$apply(function() {
-            $scope.journals.push(journalObject);
+    $scope.toggle = {};
+
+    if ($scope.role === "apprentice") {
+      $scope.journals = [];
+
+      Firestore.$getJournalsWithEmail(currentAuth.email)
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            var journalObject = doc.data();
+            journalObject.id = doc.id;
+            $scope.$apply(function() {
+              $scope.journals.push(journalObject);
+            });
           });
+        })
+        .catch(function () {
+          $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
-      })
-      .catch(function () {
-        $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
-      });
+    }
 
-    $scope.editJournal = function (journalId) {
-      $location.path("/journal/edit/"+journalId);
+    if ($scope.role === "mentor") {
+      $scope.journalsPerApprentices = [];
+
+      Firestore.$getJournalsOfConfirmedApprenticesFromMentorWithEmail(currentAuth.email)
+        .then(function (journalsPerApprentices) {
+          console.log(journalsPerApprentices["apprentice@apprentice.com"].length);
+          $scope.journalsPerApprentices = journalsPerApprentices;
+          console.log($scope.journalsPerApprentices["apprentice@apprentice.com"]);
+        })
+        .catch(function () {
+          $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
+        });
     }
   });
