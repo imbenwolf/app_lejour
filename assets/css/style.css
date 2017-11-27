@@ -38,3 +38,7 @@
   bottom: 16px;
   right: 16px;
 }
+
+.searchResultCard {
+  margin: 0 0 16px 0;
+}
