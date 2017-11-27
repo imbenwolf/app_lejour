@@ -5,10 +5,7 @@ angular.module('lejour.journal.delete', [])
         templateUrl: '/app/components/journal/delete/deleteComponent.html',
         controller: 'deleteController',
         resolve: {
-          // controller will not be loaded until $waitForSignIn resolves
-          // Auth refers to our $firebaseAuth wrapper in the factory below
           "currentAuth": function (Auth) {
-            // $waitForSignIn returns a promise so the resolve waits for it to complete
             return Auth.$requireSignIn();
           }
         }

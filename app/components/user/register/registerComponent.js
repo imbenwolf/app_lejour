@@ -5,10 +5,7 @@ angular.module('lejour.user.register', [])
         templateUrl: '/app/components/user/register/registerComponent.html',
         controller: 'registerController',
         resolve: {
-          // controller will not be loaded until $waitForSignIn resolves
-          // Auth refers to our $firebaseAuth wrapper in the factory below
           "currentAuth": function (Auth) {
-            // $waitForSignIn returns a promise so the resolve waits for it to complete
             return Auth.$requireSignOut();
           }
         }
