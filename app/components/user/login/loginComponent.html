@@ -8,7 +8,7 @@
 
       <md-input-container>
         <label>Email</label>
-        <input required id="email" name="email" ng-model="login.email">
+        <input required id="email" name="email" ng-model="email">
         <div ng-messages="loginForm.email.$error">
           <div ng-message="required">Die Email darf nicht leer sein!</div>
         </div>
@@ -16,7 +16,7 @@
 
       <md-input-container>
         <label>Passwort</label>
-        <input required id="password" type="password" name="password" ng-model="login.password"/>
+        <input required id="password" type="password" name="password" ng-model="password"/>
         <div ng-messages="loginForm.password.$error" role="alert">
           <div ng-message="required">Das Passwort darf nicht leer sein!</div>
         </div>

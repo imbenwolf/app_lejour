@@ -32,8 +32,19 @@ angular.module('lejour.user.register', [])
                 Auth.$deleteUser();
                 $mdToast.showSimple('Registrierung fehlgeschlagen!');
               });
-          }).catch(function () {
-          $mdToast.showSimple('Registrierung fehlgeschlagen!');
+          }).catch(function (error) {
+            var message;
+            switch (error.code) {
+              case "auth/email-already-in-use":
+                message = "Diese Email wird bereits verwendet!";
+                break;
+              case "auth/invalid-email":
+                message = "Diese Email ist nicht valid!";
+                break;
+              default:
+                message = "Registrierung fehlgeschlagen!"
+            }
+          $mdToast.showSimple(message);
         });
       }
     };

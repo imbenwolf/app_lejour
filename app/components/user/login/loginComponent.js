@@ -19,11 +19,24 @@ angular.module('lejour.user.login', [])
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       }
       else {
-        Auth.$signInWithEmailAndPassword(email, password).then(function() {
+        Auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function() {
           $location.path("/");
           $mdToast.showSimple('Login erfolgreich!');
-        }).catch(function () {
-          $mdToast.showSimple('Login fehlgeschlagen!');
+        }).catch(function (error) {
+          var message;
+          switch (error.code) {
+            case "auth/invalid-email":
+              message = "Diese Email ist nicht valid!";
+              break;
+            case "auth/user-disabled":
+              message = "Dieses Account ist gesperrt worden!";
+              break;
+            case "auth/user-not-found":
+            case "auth/wrong-password":
+            default:
+              message = "Registrierung fehlgeschlagen!"
+          }
+          $mdToast.showSimple(message);
         });
       }
     }
