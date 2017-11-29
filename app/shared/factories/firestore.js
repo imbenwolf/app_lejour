@@ -236,7 +236,8 @@ angular.module('lejour.firebase.firestore', [
     firestore.$addCommentToJournalWithId = function (id, author, text) {
       return firestore.$getCommentDatabaseFromJournalWithId(id).add({
         author: author,
-        text: text
+        text: text,
+        date: new Date(Date.now())
       })
     };
 

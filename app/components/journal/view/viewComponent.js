@@ -14,6 +14,8 @@ angular.module('lejour.journal.view', [])
   .controller('viewController', function ($rootScope, $scope, $location, $routeParams, $mdToast, currentAuth, Firestore) {
     $rootScope.title = 'Journal lesen';
 
+    $scope.role = currentAuth.role;
+
     Firestore.$getJournalDataWithId($routeParams.journalId)
       .then(function (doc) {
         if (doc.exists) {
@@ -43,12 +45,13 @@ angular.module('lejour.journal.view', [])
       });
 
     $scope.comment = function () {
-      console.log($scope.journal.comment);
       if ($scope.addCommentForm.$invalid) {
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       }
       else {
-        Firestore.$addCommentToJournalWithId($routeParams.journalId, currentAuth.email, $scope.journal.comment)
+        var comment = $scope.journal.comment;
+        $scope.journal.comment = "";
+        Firestore.$addCommentToJournalWithId($routeParams.journalId, currentAuth.email, comment)
           .then(function () {
             $mdToast.showSimple('Kommentieren erfolgreich!');
           }).catch(function () {
