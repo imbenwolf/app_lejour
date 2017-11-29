@@ -47,6 +47,40 @@
       </md-card>
     </md-content>
 
+    <div ng-if="role === 'mentor'">
+      <md-card ng-if="confirmedConnections.length === 0 && unconfirmedConnections.length === 0">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-title">Ziemlich leer hier...</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Sie haben noch keine Lernende abonniert.
+            Sie können welche anfragen indem sie im Suchfeld nach ihnen suchen und sie danach anfragen.
+          </p>
+          <p></p>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div ng-if="role === 'apprentice'">
+      <md-card ng-if="confirmedConnections.length === 0 && unconfirmedConnections.length === 0">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-title">Ziemlich leer hier...</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Sie haben noch keine Anfragen erhalten.
+            Sobald Ihr Lehrmeister Sie anfragt, können sie die Anfrage hier annehmen.
+          </p>
+          <p></p>
+        </md-card-content>
+      </md-card>
+    </div>
+
     <md-card ng-if="confirmedConnections.length > 0">
       <md-subheader class="white-background">{{ confirmedConnectionsText }}</md-subheader>
       <md-list class="no-padding">

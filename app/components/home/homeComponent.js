@@ -41,13 +41,13 @@ angular.module('lejour.home', [])
     }
 
     if ($scope.role === "mentor") {
-      $scope.journalsPerApprentices = [];
+      $scope.journalsPerApprentices = null;
 
       Firestore.$getJournalsOfConfirmedApprenticesFromMentorWithEmail(currentAuth.email)
         .then(function (journalsPerApprentices) {
           $scope.journalsPerApprentices = journalsPerApprentices;
         })
-        .catch(function (error) {
+        .catch(function () {
           $mdToast.showSimple('Konnte nicht Journals aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
     }

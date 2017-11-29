@@ -4,53 +4,95 @@
 
 <div layout="row" layout-align="center center">
   <div flex="100" flex-gt-xs="80">
-    <md-card ng-if="role === 'apprentice' && journals.length > 0">
-      <md-list class="no-padding">
-        <md-subheader class="white-background">Meine Journals</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="journal in journals"
-                      ng-click="navigateTo('/journal/view/'+journal.id)">
-          <md-icon class="md-avatar-icon">
-            <i class="material-icons">&#xE865;</i>
-          </md-icon>
-          <div class="md-list-item-text">
-            <h3>{{ journal.title }}</h3>
-            <p>{{ journal.date | date }}</p>
-          </div>
-          <md-icon class="md-secondary" ng-click="navigateTo('/journal/edit/'+journal.id)">
-            <i class="material-icons">&#xE254;</i>
-          </md-icon>
-          <md-icon class="md-secondary" ng-click="navigateTo('/journal/delete/'+journal.id)">
-            <i class="material-icons">&#xE872;</i>
-          </md-icon>
-          <md-divider></md-divider>
-        </md-list-item>
-      </md-list>
-    </md-card>
+    <div ng-if="role === 'apprentice'">
+      <md-card ng-if="journals.length > 0">
+        <md-list class="no-padding">
+          <md-subheader class="white-background">Meine Journals</md-subheader>
+          <md-list-item class="md-2-line" ng-repeat="journal in journals"
+                        ng-click="navigateTo('/journal/view/'+journal.id)">
+            <md-icon class="md-avatar-icon">
+              <i class="material-icons">&#xE865;</i>
+            </md-icon>
+            <div class="md-list-item-text">
+              <h3>{{ journal.title }}</h3>
+              <p>{{ journal.date | date }}</p>
+            </div>
+            <md-icon class="md-secondary" ng-click="navigateTo('/journal/edit/'+journal.id)">
+              <i class="material-icons">&#xE254;</i>
+            </md-icon>
+            <md-icon class="md-secondary" ng-click="navigateTo('/journal/delete/'+journal.id)">
+              <i class="material-icons">&#xE872;</i>
+            </md-icon>
+            <md-divider></md-divider>
+          </md-list-item>
+        </md-list>
+      </md-card>
 
-    <md-card ng-if="role === 'mentor'">
-      <md-list class="no-padding" ng-repeat="(apprenticeEmail, journals) in journalsPerApprentices">
-        <md-subheader md-ink-ripple class="white-background expand-list-subheader" ng-click="toggle[apprenticeEmail] = !toggle[apprenticeEmail]">
-          {{ apprenticeEmail }}
-          <md-icon class="right">{{ toggle[apprenticeEmail] ? '&#xE5CE;' : '&#xE5CF;' }}</md-icon>
-        </md-subheader>
-        <md-list-item class="md-2-line" ng-show="toggle[apprenticeEmail]" ng-repeat="journal in journals"
-                      ng-click="navigateTo('/journal/view/'+journal.id)">
-          <md-icon class="md-avatar-icon">
-            <i class="material-icons">&#xE865;</i>
-          </md-icon>
-          <div class="md-list-item-text">
-            <h3>{{ journal.title }}</h3>
-            <p>{{ journal.date | date }}</p>
-          </div>
-          <md-divider></md-divider>
-        </md-list-item>
-      </md-list>
-    </md-card>
+      <md-card ng-if="journals.length === 0">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-title">Ziemlich leer hier...</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Sie haben noch keine Journals geschrieben.
+            Sie können welche schreiben indem sie auf den blauen Knopf klicken.
+          </p>
+          <p></p>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div ng-if="role === 'mentor'">
+      <md-card ng-if="journalsPerApprentices !== null">
+        <md-list class="no-padding" ng-repeat="(apprenticeEmail, journals) in journalsPerApprentices">
+          <md-subheader md-ink-ripple class="white-background expand-list-subheader"
+                        ng-click="toggle[apprenticeEmail] = !toggle[apprenticeEmail]">
+            {{ apprenticeEmail }}
+            <md-icon class="right">{{ toggle[apprenticeEmail] ? '&#xE5CE;' : '&#xE5CF;' }}</md-icon>
+          </md-subheader>
+          <md-list-item class="md-2-line" ng-show="toggle[apprenticeEmail]" ng-repeat="journal in journals"
+                        ng-click="navigateTo('/journal/view/'+journal.id)">
+            <md-icon class="md-avatar-icon">
+              <i class="material-icons">&#xE865;</i>
+            </md-icon>
+            <div class="md-list-item-text">
+              <h3>{{ journal.title }}</h3>
+              <p>{{ journal.date | date }}</p>
+            </div>
+            <md-divider></md-divider>
+          </md-list-item>
+        </md-list>
+      </md-card>
+
+      <md-card ng-if="journalsPerApprentices === null">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-title">Ziemlich leer hier...</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Sie haben noch keine Lernende abonniert.
+            Sie können welche anfragen indem sie auf den blauen Knopf klicken.
+          </p>
+          <p></p>
+        </md-card-content>
+      </md-card>
+    </div>
   </div>
 </div>
 
 <md-button class="md-fab fab-bottom-right" ng-if="role === 'apprentice'" ng-click="navigateTo('/journal/write')">
   <md-tooltip md-direction="top">Journal schreiben</md-tooltip>
+  <md-icon>
+    <i class="material-icons">&#xE145;</i>
+  </md-icon>
+</md-button>
+
+<md-button class="md-fab fab-bottom-right" ng-if="role === 'mentor'" ng-click="navigateTo('/user/follow')">
+  <md-tooltip md-direction="top">Abbonements</md-tooltip>
   <md-icon>
     <i class="material-icons">&#xE145;</i>
   </md-icon>
