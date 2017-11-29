@@ -12,7 +12,7 @@ angular.module('lejour.user.register', [])
       });
   })
   .controller('registerController', function ($rootScope, $scope, $location, $mdToast, Auth, Firestore) {
-    $rootScope.title = 'Registierung';
+    $rootScope.title = 'Registrierung';
 
     $scope.role = 'apprentice';
 
