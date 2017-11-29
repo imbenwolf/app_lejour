@@ -23,6 +23,9 @@ angular.module('lejour.toolbar', [])
         case "/home":
           $rootScope.isOnPage.home = true;
           break;
+        case "/user/follow":
+          $rootScope.isOnPage.follow = true;
+          break;
         case "/user/change-password":
           $rootScope.isOnPage.changePassword = true;
           break;

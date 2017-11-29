@@ -16,8 +16,8 @@ angular.module('lejour.user.follow', [])
 
     $scope.role = currentAuth.role;
 
-    $scope.confirmedConnectionsText;
-    $scope.unconfirmedConnectionsText;
+    $scope.confirmedConnectionsText = "";
+    $scope.unconfirmedConnectionsText = "";
     $scope.confirmedConnections = [];
     $scope.unconfirmedConnections = [];
 
@@ -35,7 +35,7 @@ angular.module('lejour.user.follow', [])
             });
           }
         })
-        .catch(function (error) {
+        .catch(function () {
           $mdToast.showSimple('Konnte nicht Lehrmeister aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
       Firestore.$getUnconfirmedMentorsFromApprenticeWithEmail(currentAuth.email)
@@ -48,7 +48,7 @@ angular.module('lejour.user.follow', [])
             });
           }
         })
-        .catch(function (error) {
+        .catch(function () {
           $mdToast.showSimple('Konnte nicht Lehrmeister aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
 
@@ -110,9 +110,10 @@ angular.module('lejour.user.follow', [])
         Firestore.$followApprenticeWithEmailFromMentorWithEmail(currentAuth.email, $scope.selectedApprentice.email)
           .then(function () {
             $mdToast.showSimple('Anfrage erfolgreich!');
-          }).catch(function () {
-          $mdToast.showSimple('Anfrage fehlgeschlagen!');
-        });
+          })
+          .catch(function () {
+            $mdToast.showSimple('Anfrage fehlgeschlagen!');
+          });
       }
     }
   });
