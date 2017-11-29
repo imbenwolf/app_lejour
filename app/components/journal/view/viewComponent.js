@@ -23,7 +23,6 @@ angular.module('lejour.journal.view', [])
           journalObject.id = doc.id;
           $scope.$apply(function () {
             $scope.journal = journalObject;
-            console.log($scope.journal);
           });
         } else {
           $rootScope.navigateTo("/");

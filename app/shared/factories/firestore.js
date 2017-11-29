@@ -95,16 +95,15 @@ angular.module('lejour.firebase.firestore', [
       });
     };
 
-    firestore.$getConfirmedApprenticesFromMentorWithEmail = function(mentorEmail) {
+    firestore.$getConfirmedApprenticesFromMentorWithEmail = function (mentorEmail) {
       var defer = $q.defer();
       var confirmedApprentices = [];
       firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var apprentices = doc.data().apprentices;
-          console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
             if (confirmed) {
-              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function(confirmedApprentice) {
+              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function (confirmedApprentice) {
                 confirmedApprentices.push(confirmedApprentice);
               });
             }
@@ -115,16 +114,15 @@ angular.module('lejour.firebase.firestore', [
       return defer.promise;
     };
 
-    firestore.$getUnconfirmedApprenticesFromMentorWithEmail = function(mentorEmail) {
+    firestore.$getUnconfirmedApprenticesFromMentorWithEmail = function (mentorEmail) {
       var defer = $q.defer();
-      var unconfirmedApprentices = {};
+      var unconfirmedApprentices = [];
       firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var apprentices = doc.data().apprentices;
-          console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
             if (!confirmed) {
-              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function(unconfirmedApprentice) {
+              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function (unconfirmedApprentice) {
                 unconfirmedApprentices.push(unconfirmedApprentice);
               });
             }
@@ -141,13 +139,12 @@ angular.module('lejour.firebase.firestore', [
       firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var apprentices = doc.data().apprentices;
-          console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
             apprenticeEmail = apprenticeEmail.replace(/###/g, ".");
             if (confirmed) {
               journals[apprenticeEmail] = [];
-              firestore.$getJournalsWithEmail(apprenticeEmail).then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
+              firestore.$getJournalsWithEmail(apprenticeEmail).then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
                   var journalObject = doc.data();
                   journalObject.id = doc.id;
                   journals[apprenticeEmail].push(journalObject);
@@ -161,11 +158,11 @@ angular.module('lejour.firebase.firestore', [
       return defer.promise;
     };
 
-    firestore.$getUnconfirmedMentorsFromApprenticeWithEmail = function(apprenticeEmail) {
+    firestore.$getUnconfirmedMentorsFromApprenticeWithEmail = function (apprenticeEmail) {
       return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", false).get();
     };
 
-    firestore.$getConfirmedMentorsFromApprenticeWithEmail = function(apprenticeEmail) {
+    firestore.$getConfirmedMentorsFromApprenticeWithEmail = function (apprenticeEmail) {
       return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", true).get();
     };
 
@@ -174,8 +171,7 @@ angular.module('lejour.firebase.firestore', [
       var result = {};
       firestore.$getUserDatabase().where("email", "==", mentorEmail)
         .where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", true).get().then(function (querySnapshot) {
-          console.log(querySnapshot);
-          result = !querySnapshot.empty;
+        result = !querySnapshot.empty;
         defer.resolve(result);
       });
       return defer.promise;

@@ -36,12 +36,10 @@ angular.module('lejour.user.follow', [])
           }
         })
         .catch(function (error) {
-          console.log(error);
           $mdToast.showSimple('Konnte nicht Lehrmeister aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
       Firestore.$getUnconfirmedMentorsFromApprenticeWithEmail(currentAuth.email)
         .then(function (querySnapshot) {
-          console.log(querySnapshot.empty);
           if (!querySnapshot.empty) {
             querySnapshot.forEach(function (doc) {
               $scope.$apply(function () {
@@ -51,7 +49,6 @@ angular.module('lejour.user.follow', [])
           }
         })
         .catch(function (error) {
-          console.log(error);
           $mdToast.showSimple('Konnte nicht Lehrmeister aus der Datenbank holen. Versuchen Sie es später noch einmal');
         });
 
