@@ -89,7 +89,7 @@ angular.module('lejour.firebase.firestore', [
       return firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var updateUpprentices = {};
-          updateUpprentices["apprentices." + apprenticeEmail.replace(".", "###")] = false;
+          updateUpprentices["apprentices." + apprenticeEmail.replace(/\./g, "###")] = false;
           return firestore.$getUserWithId(doc.id).update(updateUpprentices);
         });
       });
@@ -104,7 +104,7 @@ angular.module('lejour.firebase.firestore', [
           console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
             if (confirmed) {
-              firestore.$getUserWithEmail(apprenticeEmail.replace("###", ".")).then(function(confirmedApprentice) {
+              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function(confirmedApprentice) {
                 confirmedApprentices.push(confirmedApprentice);
               });
             }
@@ -124,7 +124,7 @@ angular.module('lejour.firebase.firestore', [
           console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
             if (!confirmed) {
-              firestore.$getUserWithEmail(apprenticeEmail.replace("###", ".")).then(function(unconfirmedApprentice) {
+              firestore.$getUserWithEmail(apprenticeEmail.replace(/###/g, ".")).then(function(unconfirmedApprentice) {
                 unconfirmedApprentices.push(unconfirmedApprentice);
               });
             }
@@ -143,7 +143,7 @@ angular.module('lejour.firebase.firestore', [
           var apprentices = doc.data().apprentices;
           console.log(apprentices);
           angular.forEach(apprentices, function (confirmed, apprenticeEmail) {
-            apprenticeEmail = apprenticeEmail.replace("###", ".");
+            apprenticeEmail = apprenticeEmail.replace(/###/g, ".");
             if (confirmed) {
               journals[apprenticeEmail] = [];
               firestore.$getJournalsWithEmail(apprenticeEmail).then(function(querySnapshot) {
@@ -162,18 +162,18 @@ angular.module('lejour.firebase.firestore', [
     };
 
     firestore.$getUnconfirmedMentorsFromApprenticeWithEmail = function(apprenticeEmail) {
-      return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(".", "###"), "==", false).get();
+      return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", false).get();
     };
 
     firestore.$getConfirmedMentorsFromApprenticeWithEmail = function(apprenticeEmail) {
-      return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(".", "###"), "==", true).get();
+      return firestore.$getUserDatabase().where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", true).get();
     };
 
     firestore.$isMentorWithEmailConfirmedByApprenticeWithEmail = function (apprenticeEmail, mentorEmail) {
       var defer = $q.defer();
       var result = {};
       firestore.$getUserDatabase().where("email", "==", mentorEmail)
-        .where("apprentices." + apprenticeEmail.replace(".", "###"), "==", true).get().then(function (querySnapshot) {
+        .where("apprentices." + apprenticeEmail.replace(/\./g, "###"), "==", true).get().then(function (querySnapshot) {
           console.log(querySnapshot);
           result = !querySnapshot.empty;
         defer.resolve(result);
@@ -185,7 +185,7 @@ angular.module('lejour.firebase.firestore', [
       return firestore.$getUserDatabase().where("email", "==", mentorEmail).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           var updateUpprentices = {};
-          updateUpprentices["apprentices." + apprenticeEmail.replace(".", "###")] = true;
+          updateUpprentices["apprentices." + apprenticeEmail.replace(/\./g, "###")] = true;
           return firestore.$getUserWithId(doc.id).update(updateUpprentices);
         });
       });
