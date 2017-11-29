@@ -15,14 +15,11 @@ angular.module('lejour.user.login', [])
     $rootScope.title = "Login";
 
     $scope.login = function () {
-      var email = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
-      if (email === "" || password === "") {
-        $mdToast.showSimple('Alle Felder müssen ausgefüllt sein!');
-        return false;
+      if ($scope.loginForm.$invalid) {
+        $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       }
       else {
-        Auth.$signInWithEmailAndPassword(email, password).then(function (user) {
+        Auth.$signInWithEmailAndPassword(email, password).then(function() {
           $location.path("/");
           $mdToast.showSimple('Login erfolgreich!');
         }).catch(function () {

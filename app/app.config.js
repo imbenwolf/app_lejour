@@ -1,6 +1,7 @@
 angular.module('lejour.config', [
   'ngMaterial',
-  'ngRoute'
+  'ngRoute',
+  'ngMessages'
 ])
   .config(function ($mdThemingProvider) {
     /**

@@ -21,9 +21,6 @@ angular.module('lejour.user.register', [])
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       }
       else {
-        if ($scope.password !== $scope.repeatPassword) {
-          $mdToast.showSimple('Passwörter stimmen nicht überein!');
-        }
         Auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
           .then(function () {
             Firestore.$createUserWithEmailAndRole($scope.email, $scope.role)
