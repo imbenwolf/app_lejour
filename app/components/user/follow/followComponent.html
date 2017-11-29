@@ -27,7 +27,7 @@
         <md-list class="no-padding">
           <md-list-item>
             <md-icon class="md-avatar-icon">
-              <i class="material-icons">&#xE865;</i>
+              <i class="material-icons">&#xE7FD;</i>
             </md-icon>
             <p>{{ selectedApprentice.email }}</p>
             <md-icon ng-cloak class="md-secondary" ng-if="selectedApprentice.status == 'unrequested'"
@@ -86,7 +86,7 @@
       <md-list class="no-padding">
         <md-list-item ng-repeat="confirmedConnection in confirmedConnections">
           <md-icon class="md-avatar-icon">
-            <i class="material-icons">&#xE865;</i>
+            <i class="material-icons">&#xE7FD;</i>
           </md-icon>
           <p>{{ confirmedConnection.email }}</p>
           <md-icon ng-cloak class="md-secondary" ng-disabled="true">
@@ -102,7 +102,7 @@
       <md-list class="no-padding">
         <md-list-item ng-repeat="unconfirmedConnection in unconfirmedConnections">
           <md-icon class="md-avatar-icon">
-            <i class="material-icons">&#xE865;</i>
+            <i class="material-icons">&#xE7FD;</i>
           </md-icon>
           <p>{{ unconfirmedConnection.email }}</p>
           <md-icon ng-cloak class="md-secondary" ng-if="role === 'apprentice'" ng-click="accept(unconfirmedConnection.email)">
