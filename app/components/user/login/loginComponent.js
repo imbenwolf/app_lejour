@@ -34,7 +34,7 @@ angular.module('lejour.user.login', [])
             case "auth/user-not-found":
             case "auth/wrong-password":
             default:
-              message = "Registrierung fehlgeschlagen!"
+              message = "Login fehlgeschlagen!"
           }
           $mdToast.showSimple(message);
         });

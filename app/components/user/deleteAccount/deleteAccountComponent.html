@@ -1,4 +1,4 @@
-<form name="deleteAccpuntForm">
+<form name="deleteAccountForm">
 
   <div layout="column" layout-align="center center">
 
@@ -10,26 +10,20 @@
 
       <md-input-container>
         <label>Passwort</label>
-        <input required id="password" type="password" ng-model="password" name="password"
-               minlength="4" maxlength="50"/>
-        <div ng-messages="delteAccountForm.password.$error" role="alert">
-          <div ng-message-exp="['required', 'minlength', 'maxlength']">
-            Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
-          </div>
+        <input required id="password" type="password" ng-model="password" name="password"/>
+        <div ng-messages="deleteAccountForm.password.$error" role="alert">
+          <div ng-message="required">Das Passwort darf nicht leer sein!</div>
         </div>
       </md-input-container>
-
 
       <md-input-container>
         <label>Passwort wiederholen</label>
-        <input required id="repeatPassword" type="password" ng-model="repeatPassword" name="repeatPassword"
-               minlength="4" maxlength="50"/>
-        <div ng-messages="delteAccountForm.repeatPassword.$error" role="alert">
-          <div ng-message-exp="['required', 'minlength', 'maxlength']">
-            Passwort muss mindestens 4 und maximal 50 Zeichen enthalten!
-          </div>
+        <input required id="repeatPassword" type="password" ng-model="repeatPassword" name="repeatPassword" ng-pattern="password"/>
+        <div ng-messages="deleteAccountForm.repeatPassword.$error" role="alert">
+          <div ng-message="required">Die Passwortwiederholung darf nicht leer sein!</div>
+          <div ng-message="pattern">Die Passwörter müssen übereinstimmen!</div>
         </div>
-      </md-input-container>
+        </md-input-container>
 
     </div>
 

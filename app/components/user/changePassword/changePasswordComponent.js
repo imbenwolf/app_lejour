@@ -22,11 +22,15 @@ angular.module('lejour.user.changePassword', [])
         Auth.$signInWithEmailAndPassword(currentAuth.email, $scope.oldPassword).then(function () {
           Auth.$updatePassword($scope.newPassword).then(function () {
             $mdToast.showSimple('Passwort ändern erfolgreich!');
-          }).catch(function () {
-            $mdToast.showSimple('Passwort ändern fehlgeschlagen!');
           });
-        }).catch(function () {
-          $mdToast.showSimple('Passwort ändern fehlgeschlagen!');
+        }).catch(function (error) {
+          var message;
+          switch (error.code) {
+            case "auth/wrong-password":
+            default:
+              message = "Passwort ändern fehlgeschlagen!"
+          }
+          $mdToast.showSimple("ok");
         });
       }
     };

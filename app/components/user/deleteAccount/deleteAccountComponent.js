@@ -15,29 +15,25 @@ angular.module('lejour.user.delete', [])
     $rootScope.title = "Account löschen";
 
     $scope.delete = function () {
-      if ($scope.deleteAccpuntForm.$invalid) {
+      if ($scope.deleteAccountForm.$invalid) {
         $mdToast.showSimple('Alle Felder müssen korrekt ausgefüllt sein!');
       } else {
-        if ($scope.password !== $scope.repeatPassword) {
-          $mdToast.showSimple('Passwörter müssen übereinstimmen!');
-        } else {
-          $scope.email = currentAuth.email;
-          Auth.$signInWithEmailAndPassword($scope.email, $scope.password).then(function () {
-            Auth.$deleteUser().then(function () {
-              Firestore.$deleteUserWithEmail($scope.email).then(function() {
-                $location.path("/");
-                $mdToast.showSimple('Account löschen erfolgreich!');
-              }).catch(function() {
-                Auth.$createUserWithEmailAndPassword($scope.email, $scope.password);
-                $mdToast.showSimple('Account löschen fehlgeschlagen!');
-              });
-            }).catch(function() {
-              $mdToast.showSimple('Account löschen fehlgeschlagen!');
+        Auth.$signInWithEmailAndPassword(currentAuth.email, $scope.password).then(function () {
+          Auth.$deleteUser().then(function () {
+            Firestore.$deleteUserWithEmail(currentAuth.email).then(function () {
+              $location.path("/");
+              $mdToast.showSimple('Account löschen erfolgreich!');
             });
-          }).catch(function() {
-            $mdToast.showSimple('Account löschen fehlgeschlagen!');
           });
-        }
+        }).catch(function (error) {
+          var message;
+          switch (error.code) {
+            case "auth/wrong-password":
+            default:
+              message = "Account löschen fehlgeschlagen!"
+          }
+          $mdToast.showSimple(message);
+        });
       }
     }
   });
