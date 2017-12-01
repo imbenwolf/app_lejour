@@ -2,7 +2,7 @@ angular.module('lejour.user.register', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/register', {
-        templateUrl: '/app/components/user/register/registerComponent.html',
+        templateUrl: 'app/components/user/register/registerComponent.html',
         controller: 'registerController',
         resolve: {
           "currentAuth": function (Auth) {

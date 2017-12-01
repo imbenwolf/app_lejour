@@ -6,7 +6,7 @@ angular.module('lejour.home', [])
       })
 
       .when('/home', {
-        templateUrl: '/app/components/home/homeComponent.html',
+        templateUrl: 'app/components/home/homeComponent.html',
         controller: 'homeController',
         resolve: {
           "currentAuth": function (Auth) {

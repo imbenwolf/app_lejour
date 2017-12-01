@@ -2,7 +2,7 @@ angular.module('lejour.user.follow', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/follow', {
-        templateUrl: '/app/components/user/follow/followComponent.html',
+        templateUrl: 'app/components/user/follow/followComponent.html',
         controller: 'followController',
         resolve: {
           "currentAuth": function (Auth) {

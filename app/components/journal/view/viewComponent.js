@@ -2,7 +2,7 @@ angular.module('lejour.journal.view', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/journal/view/:journalId', {
-        templateUrl: '/app/components/journal/view/viewComponent.html',
+        templateUrl: 'app/components/journal/view/viewComponent.html',
         controller: 'viewController',
         resolve: {
           "currentAuth": function (Auth, $route) {

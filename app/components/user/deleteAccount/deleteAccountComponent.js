@@ -2,7 +2,7 @@ angular.module('lejour.user.delete', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/delete', {
-        templateUrl: '/app/components/user/deleteAccount/deleteAccountComponent.html',
+        templateUrl: 'app/components/user/deleteAccount/deleteAccountComponent.html',
         controller: 'deleteAccountController',
         resolve: {
           "currentAuth": function (Auth) {

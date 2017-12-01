@@ -36,6 +36,6 @@ angular.module('lejour.toolbar', [])
     };
   })
   .component('toolbar', {
-    templateUrl: '/app/shared/toolbar/toolbarComponent.html',
+    templateUrl: 'app/shared/toolbar/toolbarComponent.html',
     controller: function () {}
   });

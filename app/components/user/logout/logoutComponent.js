@@ -2,7 +2,7 @@ angular.module('lejour.user.logout', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/logout', {
-        templateUrl: '/app/components/user/logout/logoutComponent.html',
+        templateUrl: 'app/components/user/logout/logoutComponent.html',
         controller: 'logoutController',
         resolve: {
           "currentAuth": function (Auth) {

@@ -2,7 +2,7 @@ angular.module('lejour.user.changePassword', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/change-password', {
-        templateUrl: '/app/components/user/changePassword/changePasswordComponent.html',
+        templateUrl: 'app/components/user/changePassword/changePasswordComponent.html',
         controller: 'changePasswordController',
         resolve: {
           "currentAuth": function (Auth) {

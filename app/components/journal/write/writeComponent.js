@@ -2,7 +2,7 @@ angular.module('lejour.journal.write', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/journal/write', {
-        templateUrl: '/app/components/journal/editJournalComponent.html',
+        templateUrl: 'app/components/journal/editJournalComponent.html',
         controller: 'writeController',
         resolve: {
           "currentAuth": function (Auth) {

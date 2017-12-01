@@ -2,7 +2,7 @@ angular.module('lejour.user.login', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/user/login', {
-        templateUrl: '/app/components/user/login/loginComponent.html',
+        templateUrl: 'app/components/user/login/loginComponent.html',
         controller: 'loginController',
         resolve: {
           "currentAuth": function (Auth) {
